@@ -1,0 +1,19 @@
+<?php
+
+namespace DummyNamespace;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class DummyClass extends FormRequest
+{
+    /**
+     * @return string[]
+     */
+    public function rules()
+    {
+        return [
+            'username' => 'required|string',
+            'password' => 'required|string',
+        ];
+    }
+}

@@ -1,0 +1,10 @@
+<?php
+
+namespace DummyNamespace;
+
+use Wantp\ApiAdmin\Http\Controllers\AuthorizationController as BaseAuthController;
+
+class DummyClass extends BaseAuthController
+{
+
+}

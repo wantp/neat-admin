@@ -1,0 +1,12 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use Wantp\Neat\Facades\Neat;
+
+
+Route::group(['prefix' => Neat::routePrefix(), 'middleware' => ['api'],], function () {
+    //
+    Route::group(['middleware' => ['auth:sanctum', 'permission']], function () {
+        //
+    });
+});

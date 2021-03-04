@@ -1,0 +1,16 @@
+<?php
+
+namespace DummyNamespace;
+
+use Illuminate\Routing\Controller;
+
+class DummyClass extends Controller
+{
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function index()
+    {
+        return response()->json(['message' => trans('api-admin.welcome')], 200);
+    }
+}
