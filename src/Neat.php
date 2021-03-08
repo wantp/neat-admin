@@ -16,7 +16,7 @@ class Neat
      */
     public function __construct()
     {
-        $this->version = config('neat.version');
+        $this->version = config('neat_default.version');
     }
 
     /**

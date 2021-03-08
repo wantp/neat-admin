@@ -122,7 +122,7 @@ class Controller extends BaseController
      */
     private function includes(&$query)
     {
-        if ($includes = request()->get(config('neat.param_name.include'))) {
+        if ($includes = request()->get(config('neat_default.param_name.include'))) {
             $includes = explode(',', $includes);
             foreach ($includes as $include) {
                 $query = $query->with($include);
@@ -153,7 +153,7 @@ class Controller extends BaseController
      */
     private function sorter($query)
     {
-        if ($sorter = request()->input(config('neat.param_name.sorter'))) {
+        if ($sorter = request()->input(config('neat_default.param_name.sorter'))) {
             $sorter = is_array($sorter) ? $sorter : json_decode($sorter, true);
             foreach ($sorter as $field => $order) {
                 $order = str_replace(['ascend', 'descend'], ['asc', 'desc'], strtolower($order));
@@ -197,7 +197,7 @@ class Controller extends BaseController
      */
     protected function pagesize()
     {
-        return (int)request(config('neat.param_name.pageSize'), config('neat.default_pagesize'));
+        return (int)request(config('neat_default.param_name.pageSize'), config('neat_default.default_pagesize'));
     }
 
     /**

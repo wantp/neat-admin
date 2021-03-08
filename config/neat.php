@@ -1,12 +1,30 @@
 <?php
 
 return [
-    'version' => '0.1.0',
-    'param_name' => [
-        'include' => 'include',
-        'pageSize' => 'pageSize',
-        'sorter' => 'sorter',
-        'filter' => 'filter',
+    'root' => app_path('Modules/Admin'),
+
+    'database' => [
+        'connection' => '',
+
+        'tables' => [
+            'users' => 'neat_users',
+            'roles' => 'neat_roles',
+            'permissions' => 'neat_permissions',
+            'permission_groups' => 'neat_permission_groups',
+            'menus' => 'neat_menus',
+            'role_user' => 'neat_role_user',
+            'role_permission' => 'neat_role_permission',
+            'role_menu' => 'neat_role_menu',
+        ]
     ],
-    'default_pagesize' => 10
+
+    'route' => [
+        'prefix' => 'api/admin',
+    ],
+
+    'filesystem' => [
+        'disk' => 'public',
+        'path' => 'admin',
+    ]
+
 ];

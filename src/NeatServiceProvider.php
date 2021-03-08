@@ -36,8 +36,8 @@ class NeatServiceProvider extends ServiceProvider
         $this->app->bind(\Wantp\Neat\Contracts\Relation::class, Relation::class);
 
         $this->app->register(EventServiceProvider::class);
-        $this->mergeConfigFrom(__DIR__ . '/../config/admin.php', 'admin');
         $this->mergeConfigFrom(__DIR__ . '/../config/neat.php', 'neat');
+        $this->mergeConfigFrom(__DIR__ . '/../config/neat_default.php', 'neat_default');
         JsonResource::withoutWrapping();
 
         $this->registerMiddleware();
@@ -139,7 +139,7 @@ class NeatServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__ . '/../config/admin.php' => config_path('admin.php'),
+                __DIR__ . '/../config/neat.php' => config_path('neat.php'),
                 __DIR__ . '/../resources/lang' => resource_path('lang'),
             ]);
         }
