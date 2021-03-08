@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Neat Admin</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="description" content="前后端分离,前后端分离的后台系统,laravel,admin,api admin,laravel admin,antd,antd pro">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css">
+    <!-- Custom theme stylesheet -->
+    <link rel="stylesheet" href="resources/theme-custom.css">
+</head>
+<body>
+<div id="app"></div>
+<script>
+    window.$docsify = {
+        name: 'Neat Admin',
+        repo: '',
+        loadSidebar: true,
+        subMaxLevel: 2,
+        coverpage: true,
+        // 完整配置参数
+        search: {
+            maxAge: 86400000, // 过期时间，单位毫秒，默认一天
+            paths: [], // or 'auto'
+            placeholder: '搜索',
+            noData: '没找到相关内容!',
+            // 搜索标题的最大层级, 1 - 6
+            depth: 2,
+        },
+        copyCode: {
+            buttonText : 'Copy'
+        },
+        markdown: {
+            breaks: true,
+            smartypants: true,
+            gfm:true
+        }
+    }
+</script>
+<script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
+<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-bash.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-markdown.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-nginx.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-php.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-http.min.js"></script>
+</body>
+</html>

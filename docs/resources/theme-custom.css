@@ -1,0 +1,15 @@
+:root {
+    --theme-color: #808080;
+
+    --base-background-color: #fff;
+    --base-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    --base-font-size: 12px;
+    --base-font-weight: normal;
+    --base-line-height: 1.7;
+}
+
+
+.markdown-section pre > code {
+    white-space: pre-line;
+    word-break:break-all
+}
