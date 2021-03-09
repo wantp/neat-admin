@@ -32,12 +32,48 @@ Authorization: Bearer your_access_token
 详情参考[菜单管理](../guide/menu.md)
 
 ## CURD
+简单两步即可快速构建`RESTFUL`风格的`CURD`接口
+
+#### 使用 `Artisan` 命令行构建`CURD`接口 
+以`users`表的`CURD`为例
 ```shell
-php artisan neat:generate
+php artisan neat:generate UserController
 ```
+`neat:generate` 根据控制器名称分别生成(已存在则跳过)对应的`Model`、`Filter`、`Resource`和`Controller`  
+`UserController`生成的分别是:
+- Model *app/Models/User.php* 
+- Filter *app/Modules/Admin/Http/Filers/UserFilter*
+- Resource *app/Modules/Admin/Http/Filers/UserResource*
+- Controller *app/Modules/Admin/Http/Controller/UserController*
 
-配置路由
+#### 配置路由
+添加路由到`neat-admin`安装目录下的 *route.php*  
+以添加`UserController` resource 路由为例
 ```php
+<?php
 
+use Illuminate\Support\Facades\Route;
+use Wantp\Neat\Facades\Neat;
+
+
+Route::group(['prefix' => Neat::routePrefix(), 'middleware' => ['api'],], function () {
+    //
+    Route::group(['middleware' => ['auth:sanctum', 'permission']], function () {
+    
+        // 在这里添加UserController路由
+        Route::resource('users',\App\Modules\Admin\Http\Controllers\UserController::class);
+    });
+});
 ```
+
+#### 接口请求
+接口已就绪，使用客户端请求接口查看效果
+
+| Method | URI | Action |
+| --- | --- | --- |
+| GET | api/admin/users | App\Modules\Admin\Http\Controllers\UserController@index |
+| GET | api/admin/users/{user} | App\Modules\Admin\Http\Controllers\UserController@show |
+| POST | api/admin/users | App\Modules\Admin\Http\Controllers\UserController@store |
+| PUT | api/admin/users/{user} | App\Modules\Admin\Http\Controllers\UserController@update |
+| DELETE | api/admin/users/{user} | App\Modules\Admin\Http\Controllers\UserController@destroy |
 
