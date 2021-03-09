@@ -9,7 +9,7 @@ trait AdminDatabaseConnection
      */
     public function getConnectionName()
     {
-        return config('admin.database.connection') ?: config('database.default');
+        return config('neat.database.connection') ?: config('database.default');
     }
 
     /**
@@ -18,6 +18,6 @@ trait AdminDatabaseConnection
      */
     protected function getTableName($key)
     {
-        return config('admin.database.tables.' . $key);
+        return config('neat.database.tables.' . $key);
     }
 }

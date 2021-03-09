@@ -7,12 +7,17 @@ namespace Wantp\Neat;
 class Neat
 {
     /**
+     * @var string
+     */
+    protected $version;
+
+    /**
      * @var bool
      */
     protected $runsMigrations = true;
 
     /**
-     * Admin constructor.
+     * Neat constructor.
      */
     public function __construct()
     {
@@ -54,11 +59,11 @@ class Neat
     }
 
     /**
-     * @return \Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application|mixed
+     * @return string
      */
     public function root()
     {
-        return config('admin.root');
+        return config('neat.root');
     }
 
     /**
@@ -70,11 +75,19 @@ class Neat
     }
 
     /**
-     * @return \Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application|mixed
+     * @return string
      */
     public function routePrefix()
     {
-        return config('admin.route.prefix');
+        return config('neat.route.prefix');
+    }
+
+    /**
+     * @return string
+     */
+    public function modelsPath()
+    {
+        return config('neat.models.path');
     }
 
     /**
@@ -83,5 +96,21 @@ class Neat
     public function controllersPath()
     {
         return $this->root() . '/Http/Controllers';
+    }
+
+    /**
+     * @return string
+     */
+    public function resourcesPath()
+    {
+        return $this->root() . '/Http/Resources';
+    }
+
+    /**
+     * @return string
+     */
+    public function filtersPath()
+    {
+        return $this->root() . '/Http/Filters';
     }
 }

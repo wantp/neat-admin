@@ -53,20 +53,19 @@ class InstallCommand extends Command
             return false;
         }
 
-        $this->installAdmin();
-
         $this->call('migrate');
-
         $this->call('db:seed', ['--class' => AdministratorSeeder::class]);
         $this->call('db:seed', ['--class' => MenuSeeder::class]);
 
-        $this->line('<info>Admin packages create successed.</info>');
+        $this->installNeat();
+
+        $this->line('<info>Neat admin install successed.</info>');
     }
 
     /**
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
-    protected function installAdmin()
+    protected function installNeat()
     {
         $this->installControllers();
         $this->installRoutes();
@@ -75,7 +74,7 @@ class InstallCommand extends Command
     protected function installControllers()
     {
         $this->files->makeDirectory(Neat::controllersPath(), 0644, true);
-        $this->line('<info>Controller directory create successed:</info> ' . str_replace(base_path(), '', Neat::controllersPath()));
+        $this->line('<info>Controller directory create successed:</info>');
     }
 
     /**
@@ -84,6 +83,6 @@ class InstallCommand extends Command
     protected function installRoutes()
     {
         $this->files->put(Neat::routePath(), $this->files->get(__DIR__ . '/stubs/routes.stub'));
-        $this->line('<info>Routes file create successed:</info> ' . str_replace(base_path(), '', Neat::routePath()));
+        $this->line('<info>Routes file create successed:</info> ');
     }
 }

@@ -14,7 +14,7 @@ class MenuSeeder extends Seeder
      */
     public function run()
     {
-        Menu::upsert([
+        Menu::insert([
             [
                 'id' => 1,
                 'parent_id' => 0,
@@ -57,6 +57,6 @@ class MenuSeeder extends Seeder
                 'path' => '/neat/menus',
                 'icon' => '',
             ],
-        ], ['id']);
+        ]);
     }
 }

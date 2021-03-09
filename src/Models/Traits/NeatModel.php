@@ -2,7 +2,7 @@
 
 namespace Wantp\Neat\Models\Traits;
 
-trait AdminModel
+trait NeatModel
 {
     use AdminDatabaseConnection, SerializeDate;
 }

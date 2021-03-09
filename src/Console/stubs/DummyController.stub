@@ -1,0 +1,81 @@
+<?php
+
+namespace DummyNamespace;
+
+use Illuminate\Http\Request;
+use Wantp\Neat\Http\Controllers\Controller;
+use DummyModel;
+use DummyResource;
+use DummyFilter;
+
+
+class DummyController extends Controller
+{
+    /**
+     * @var string Model class path
+     */
+    protected $modelClass = DummyModelClass;
+
+    /**
+     * @var string Filter class path
+     */
+    protected $filterClass = DummyFilterClass;
+
+    /**
+     * @var string Resource class path
+     */
+    protected $resourceClass = DummyResourceClass;
+
+    /**
+     * Resource list
+     *
+     * @return mixed
+     */
+    public function index()
+    {
+        return parent::__index();
+    }
+
+    /**
+     * Resource detail
+     *
+     * @param int $id
+     * @return mixed
+     */
+    public function show($id)
+    {
+        return parent::__show($id);
+    }
+
+    /**
+     * Add resource
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function store(Request $request)
+    {
+        return parent::__store($request->all());
+    }
+
+    /**
+     * Update Resource
+     *
+     * @param DummyModel $model
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function update(DummyModel $model, Request $request)
+    {
+        return parent::__update($model, $request->all());
+    }
+
+    /**
+     * @param DummyModel $model
+     * @return string[]
+     */
+    public function destroy(DummyModel $model)
+    {
+        return parent::__destroy($model);
+    }
+}

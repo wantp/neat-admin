@@ -4,11 +4,11 @@ namespace Wantp\Neat\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Wantp\Neat\Models\Traits\AdminModel;
+use Wantp\Neat\Models\Traits\NeatModel;
 
 class Menu extends Model
 {
-    use AdminModel, SoftDeletes;
+    use NeatModel, SoftDeletes;
 
     /**
      * @return \Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application|mixed|string

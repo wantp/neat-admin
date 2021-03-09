@@ -29,6 +29,6 @@ class Migration extends Base
      */
     public function getConnection()
     {
-        return config('admin.database.connection') ?: config('database.default');
+        return config('neat.database.connection') ?: config('database.default');
     }
 }

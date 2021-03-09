@@ -5,11 +5,11 @@ namespace Wantp\Neat\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Wantp\Neat\Http\Auth\Permission as PermissionChecker;
-use Wantp\Neat\Models\Traits\AdminModel;
+use Wantp\Neat\Models\Traits\NeatModel;
 
 class Permission extends Model
 {
-    use AdminModel, SoftDeletes;
+    use NeatModel, SoftDeletes;
 
     /**
      * @return \Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application|mixed|string

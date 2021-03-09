@@ -1,0 +1,10 @@
+<?php
+
+namespace DummyNamespace;
+
+use Wantp\Neat\Filter;
+
+class DummyFilter extends Filter
+{
+
+}

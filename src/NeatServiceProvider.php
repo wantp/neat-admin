@@ -91,7 +91,7 @@ class NeatServiceProvider extends ServiceProvider
      */
     protected function loadRoutes()
     {
-        $routeFile = config('admin.root') . '/routes.php';
+        $routeFile = config('neat.root') . '/routes.php';
         if (is_file($routeFile)) {
             $this->loadRoutesFrom($routeFile);
             $this->defineNeatRoutes();

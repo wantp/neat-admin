@@ -9,16 +9,17 @@ use Illuminate\Support\Facades\Facade;
  * Class Admin
  * @package Wantp\Neat\Facades
  *
- * @method static \Wantp\Neat\Neat configs()
- * @method static \Wantp\Neat\Neat version()
- * @method static \Wantp\Neat\Neat runsMigrations()
- * @method static \Wantp\Neat\Neat shouldRunMigrations()
- * @method static \Wantp\Neat\Neat ignoreMigrations()
- * @method static \Wantp\Neat\Neat root()
- * @method static \Wantp\Neat\Neat routePath()
- * @method static \Wantp\Neat\Neat routePrefix()
- * @method static \Wantp\Neat\Neat routes()
- * @method static \Wantp\Neat\Neat controllersPath()
+ * @method static string version()
+ * @method static void runsMigrations()
+ * @method static void shouldRunMigrations()
+ * @method static void ignoreMigrations()
+ * @method static string root()
+ * @method static string routePath()
+ * @method static string routePrefix()
+ * @method static string controllersPath()
+ * @method static string resourcesPath()
+ * @method static string filtersPath()
+ * @method static string modelsPath()
  *
  * @see \Wantp\Neat\Neat
  */

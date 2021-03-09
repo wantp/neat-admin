@@ -18,6 +18,10 @@ return [
         ]
     ],
 
+    'models' => [
+        'path' => app_path('Models'),
+    ],
+
     'route' => [
         'prefix' => 'api/admin',
     ],

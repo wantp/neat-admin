@@ -12,7 +12,7 @@ class CreateNeatPermissionsTable extends Migration
      */
     public function up()
     {
-        $this->schema->create(config('admin.database.tables.permissions'), function (Blueprint $table) {
+        $this->schema->create(config('neat.database.tables.permissions'), function (Blueprint $table) {
             $table->increments('id');
             $table->integer('parent_id')->default(0);
             $table->string('name', 50);
@@ -37,6 +37,6 @@ class CreateNeatPermissionsTable extends Migration
      */
     public function down()
     {
-        $this->schema->dropIfExists(config('admin.database.tables.permissions'));
+        $this->schema->dropIfExists(config('neat.database.tables.permissions'));
     }
 }

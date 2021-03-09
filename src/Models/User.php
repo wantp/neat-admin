@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
-use Wantp\Neat\Models\Traits\AdminModel;
+use Wantp\Neat\Models\Traits\NeatModel;
 use Wantp\Neat\Models\Traits\HasPermissions;
 
 /**
@@ -17,7 +17,7 @@ use Wantp\Neat\Models\Traits\HasPermissions;
  */
 class User extends Authenticatable
 {
-    use AdminModel, SoftDeletes, HasApiTokens, HasPermissions;
+    use NeatModel, SoftDeletes, HasApiTokens, HasPermissions;
 
     protected $hidden = ['password'];
 
@@ -33,6 +33,6 @@ class User extends Authenticatable
 
     public function getAvatarAttribute($value)
     {
-        return $value ? Storage::disk(config('admin.filesystem.disk'))->url($value) : $value;
+        return $value ? Storage::disk(config('neat.filesystem.disk'))->url($value) : $value;
     }
 }

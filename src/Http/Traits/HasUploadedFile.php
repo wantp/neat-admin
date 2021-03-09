@@ -9,8 +9,8 @@ trait HasUploadedFile
 {
     protected function uploadFile($path = '')
     {
-        $disk = config('admin.filesystem.disk');
-        $path = rtrim(config('admin.filesystem.path') . '/' . ltrim($path, '/'), '/');
+        $disk = config('neat.filesystem.disk');
+        $path = rtrim(config('neat.filesystem.path') . '/' . ltrim($path, '/'), '/');
 
         $filepath = request()->file('file')->store($path, $disk);
 

@@ -12,7 +12,7 @@ class CreateNeatRolesTable extends Migration
      */
     public function up()
     {
-        $this->schema->create(config('admin.database.tables.roles'), function (Blueprint $table) {
+        $this->schema->create(config('neat.database.tables.roles'), function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->string('name', 50);
             $table->string('slug', 50);
@@ -34,6 +34,6 @@ class CreateNeatRolesTable extends Migration
      */
     public function down()
     {
-        $this->schema->dropIfExists(config('admin.database.tables.roles'));
+        $this->schema->dropIfExists(config('neat.database.tables.roles'));
     }
 }

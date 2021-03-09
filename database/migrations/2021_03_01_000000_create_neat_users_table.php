@@ -12,7 +12,7 @@ class CreateNeatUsersTable extends Migration
      */
     public function up()
     {
-        $this->schema->create(config('admin.database.tables.users'), function (Blueprint $table) {
+        $this->schema->create(config('neat.database.tables.users'), function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->string('username', 50)->unique();
             $table->string('nickname', 100)->nullable();
@@ -34,6 +34,6 @@ class CreateNeatUsersTable extends Migration
      */
     public function down()
     {
-        $this->schema->dropIfExists(config('admin.database.tables.users'));
+        $this->schema->dropIfExists(config('neat.database.tables.users'));
     }
 }

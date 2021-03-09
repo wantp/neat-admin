@@ -12,7 +12,7 @@ class CreateNeatRolePermissionTable extends Migration
      */
     public function up()
     {
-        $this->schema->create(config('admin.database.tables.role_permission'), function (Blueprint $table) {
+        $this->schema->create(config('neat.database.tables.role_permission'), function (Blueprint $table) {
             $table->integer('role_id');
             $table->integer('permission_id');
 
@@ -30,6 +30,6 @@ class CreateNeatRolePermissionTable extends Migration
      */
     public function down()
     {
-        $this->schema->dropIfExists(config('admin.database.tables.role_permission'));
+        $this->schema->dropIfExists(config('neat.database.tables.role_permission'));
     }
 }
