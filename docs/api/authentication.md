@@ -197,9 +197,10 @@ Access-Control-Allow-Origin: *
 
 | 参数 | 类型 | 说明 |
 | --- | --- | ---|
-|  | array | menu[] |
+|  | array | Menu[] |
 
-- menu
+- Menu
+
 | 参数 | 类型 | 说明 |
 | --- | --- | ---|
 | id | string | ID |
