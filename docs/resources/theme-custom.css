@@ -7,9 +7,3 @@
     --base-font-weight: normal;
     --base-line-height: 1.7;
 }
-
-
-.markdown-section pre > code {
-    white-space: pre-line;
-    word-break:break-all
-}

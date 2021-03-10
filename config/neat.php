@@ -10,7 +10,6 @@ return [
             'users' => 'neat_users',
             'roles' => 'neat_roles',
             'permissions' => 'neat_permissions',
-            'permission_groups' => 'neat_permission_groups',
             'menus' => 'neat_menus',
             'role_user' => 'neat_role_user',
             'role_permission' => 'neat_role_permission',
