@@ -16,6 +16,7 @@
   - [RBAC 权限管理](guide/rbac.md)
   - [菜单管理](guide/menu.md)
 
+
 - CURD
 
   - [资源列表](curd/getResources.md)
@@ -24,14 +25,17 @@
   - [更新资源](curd/updateResource.md)
   - [删除资源](curd/destroyResource.md)
 
+
 - 文件系统
 
   - [文件上传](filesystem/upload.md)
+
 
 - 其他
 
   - [导出表格](other/export.md)
   - [国际化](other/i18n.md)
+  - [拖拽排序](other/drag_sort.md)
 
 
 - 内置接口
