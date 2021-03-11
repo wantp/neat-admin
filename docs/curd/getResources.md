@@ -19,7 +19,7 @@ class UserController extends \Wantp\Neat\Http\Controllers\Controller
      */
     public function index()
     {
-        return parent::__index();
+        return $this->__index();
     }
 }
 ```
