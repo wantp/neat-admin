@@ -3,7 +3,7 @@
 `\Wantp\Neat\Http\Controllers\Controller` 的 `__index` 方法对获取资源列表进行了封装。  
 **使用方法：**
 
-1. （推荐）使用命令行快速构建CURD控制器，阅读[命令行](../guide/command.md)获取命令行使用方法
+1. （推荐）使用命令行快速构建CURD控制器，阅读[命令行](../guide/command.md)了解更多命令行使用方法
 2. 如果是自定义控制器，继承`\Wantp\Neat\Http\Controllers\Controller`，设置$modelClass，调用 `__index`方法
 
 ```php

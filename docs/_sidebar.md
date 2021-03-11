@@ -31,6 +31,7 @@
 - 其他
 
   - [导出表格](other/export.md)
+  - [国际化](other/i18n.md)
 
 
 - 内置接口

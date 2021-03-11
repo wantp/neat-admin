@@ -3,7 +3,7 @@
 `neat-admin` 使用 [sanctum](https://github.com/laravel/sanctum) 实现身份认证
 
 
-阅读 [身份认证 接口文档](../api/authentication.md) 获取详细接口信息
+阅读 [身份认证 接口文档](../api/authentication.md) 了解接口使用
 
 
 ## 认证流程
