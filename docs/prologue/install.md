@@ -4,7 +4,14 @@
  - PHP >= 7.3
  - Laravel > 7.0.0
 
-## 进入Laravel项目，如果没有先安装Laravel项目
+## 进入Laravel项目
+如果没有先创建Laravel项目
+```shell
+# 创建laravel项目
+composer create-project laravel/laravel my-laravel "^7.0" --prefer-dist
+# 进入项目目录
+cd my-laravel
+```
 
 ## 获取`neat-admin`扩展包
 
@@ -22,7 +29,7 @@ php artisan neat:publish
 - 语言包 `resources/lang/en/admin.php`、 `resources/lang/en/admin.php`
 
 ## 安装neat-admin
-`neat-admin` 默认安装在 `app/Modules/ApiAdmin` 目录下, 通过修改配置文件 `config/neat.php` 的配置项 `root` 调整
+`neat-admin` 默认安装在 `app/Modules/Admin` 目录下, 通过修改配置文件 `config/neat.php` 的配置项 `root` 调整
 ```shell
 php artisan neat:install
 ```
@@ -34,10 +41,15 @@ php artisan neat:install
 
 ## 安装完成后的目录结构 
 ```
-app/Modules/ApiAdmin
+app/Modules/Admin
 ├── Http
 │   └── Controllers
+│   └── Filters
+│   └── Resources
 └── routes.php
 ```
-1. `app/Modules/ApiAdmin/routes.php` 后台路由文件
-2. `app/Modules/ApiAdmin/Controllers` 后台控制器目录
+1. `app/Modules/Admin/routes.php` 后台路由文件
+2. `app/Modules/Admin/Http/Controllers` 后台控制器目录
+3. `app/Modules/Admin/Http/Filters` 查询过滤器目录
+4. `app/Modules/Admin/Http/Resources` API资源目录
+

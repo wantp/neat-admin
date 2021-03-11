@@ -116,7 +116,7 @@ class GenerateCommand extends Command
             return;
         }
         if (!is_dir($modelsPath)) {
-            $this->files->makeDirectory($modelsPath);
+            $this->files->makeDirectory($modelsPath, 0644, true);
         }
         $stub = $this->files->get(__DIR__ . '/stubs/DummyModel.stub');
         $content = str_replace(
@@ -145,7 +145,7 @@ class GenerateCommand extends Command
             return;
         }
         if (!is_dir($filtersPath)) {
-            $this->files->makeDirectory($filtersPath);
+            $this->files->makeDirectory($filtersPath, 0644, true);
         }
         $stub = $this->files->get(__DIR__ . '/stubs/DummyFilter.stub');
         $content = str_replace(
@@ -174,7 +174,7 @@ class GenerateCommand extends Command
             return;
         }
         if (!is_dir($resourcesPath)) {
-            $this->files->makeDirectory($resourcesPath);
+            $this->files->makeDirectory($resourcesPath, 0644, true);
         }
         $stub = $this->files->get(__DIR__ . '/stubs/DummyResource.stub');
         $content = str_replace(
@@ -200,7 +200,7 @@ class GenerateCommand extends Command
             return;
         }
         if (!is_dir($controllersPath)) {
-            $this->files->makeDirectory($controllersPath);
+            $this->files->makeDirectory($controllersPath, 0644, true);
         }
         $stub = $this->files->get(__DIR__ . '/stubs/DummyController.stub');
 

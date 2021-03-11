@@ -77,6 +77,18 @@ class InstallCommand extends Command
         $this->line('<info>Controller directory create successed:</info>');
     }
 
+    protected function installFilters()
+    {
+        $this->files->makeDirectory(Neat::filtersPath(), 0644, true);
+        $this->line('<info>Controller directory create successed:</info>');
+    }
+
+    protected function installResources()
+    {
+        $this->files->makeDirectory(Neat::resourcesPath(), 0644, true);
+        $this->line('<info>Controller directory create successed:</info>');
+    }
+
     /**
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */

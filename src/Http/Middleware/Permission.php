@@ -11,7 +11,7 @@ use Wantp\Neat\Models\User;
  * Permission Middleware
  *
  * Class Permission
- * @package Wantp\ApiAdmin\Http\Middleware
+ * @package Wantp\Neat\Http\Middleware
  */
 class Permission
 {
