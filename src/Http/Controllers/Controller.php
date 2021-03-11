@@ -83,7 +83,7 @@ class Controller extends BaseController
     public function __store($inputs)
     {
         $this->model = app()->make($this->modelClass);
-        $this->inputs = $inputs;
+        $this->inputs = $this->filterNullInput($inputs);
         $this->save();
 
         return $this->responseResource($this->model);
@@ -98,7 +98,7 @@ class Controller extends BaseController
     public function __update(Model $model, $inputs)
     {
         $this->model = $model;
-        $this->inputs = $inputs;
+        $this->inputs = $this->filterNullInput($inputs);
         $this->save();
 
         return $this->responseResource($this->model);

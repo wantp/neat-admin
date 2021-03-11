@@ -2,7 +2,11 @@
 
 namespace Wantp\Neat;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Collection;
 
 class Relation
 {
@@ -50,6 +54,10 @@ class Relation
             $relation = call_user_func([$this->model, $key]);
             if ($relation instanceof BelongsToMany) {
                 $this->saveBelongsToMany($relation, $value);
+            } elseif ($relation instanceof HasOne) {
+                $this->saveHasOne($relation, $value);
+            } elseif ($relation instanceof HasMany) {
+                $this->saveHasMany($relation, $value);
             }
         }
     }
@@ -64,5 +72,64 @@ class Relation
             $value = json_decode($value, true);
         }
         $relation->sync(array_column($value, $relation->getRelatedKeyName()));
+    }
+
+    /**
+     * @param HasOne $relation
+     * @param $value
+     */
+    protected function saveHasOne(HasOne $relation, $value)
+    {
+        if (is_string($value)) {
+            $value = json_decode($value, true);
+        }
+
+        if (empty($value)) {
+            return $relation->delete();
+        }
+
+        $relationModle = $relation->first() ?? $relation->getModel();
+        foreach ($value as $field => $item) {
+            $relationModle->{$field} = $item;
+        }
+
+        return $relation->save($relationModle);
+    }
+
+    /**
+     * @param HasMany $relation
+     * @param $values
+     */
+    protected function saveHasMany(HasMany $relation, $values)
+    {
+        if (is_string($values)) {
+            $values = collect(json_decode($values, true));
+        }
+
+        $localKey = $relation->getLocalKeyName();
+
+        $existsRelationValues = [];
+        $newRelationValues = [];
+        $values->map(function ($value) use (&$existsRelationValues, &$newRelationValues, $localKey) {
+            if (!empty($value[$localKey])) {
+                $existsRelationValues[$value[$localKey]] = $value;
+            } else {
+                $newRelationValues[] = $value;
+            }
+        });
+
+        $models = new Collection();
+        $relationModels = collect($relation->getModels())->keyBy($localKey);
+        $relationModels->map(function (Model $model) use ($models, $localKey, $existsRelationValues) {
+            if (isset($existsRelationValues[$model->{$localKey}])) {
+                $model->fill($existsRelationValues[$model->{$localKey}]);
+                $models->add($model);
+            } else {
+                $model->delete();
+            }
+        });
+        $models = $models->concat($relation->makeMany($newRelationValues));
+
+        return $relation->saveMany($models);
     }
 }

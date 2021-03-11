@@ -1,6 +1,5 @@
 # 删除资源
 
-
 `\Wantp\Neat\Http\Controllers\Controller` 的 `__destroy` 方法对删除资源进行了封装。  
 **使用方法：**
 
@@ -17,13 +16,13 @@ class UserController extends \Wantp\Neat\Http\Controllers\Controller
 }
 ```
 
-## 获取资源
+## 删除资源
 
-控制器完成后，要获取资源还需要配置路由 配置show路由
+控制器完成后，要获取资源还需要配置路由 配置destroy路由
 
 ```php
 Route::DELETE('users/{user}',[\App\Modules\Admin\Http\Controllers\UserController::class,'destroy']);
 ```
 
-然后可以通过客户端请求接口获取资源列表了
+然后可以通过客户端请求接口删除资源了
 `DELETE` /api/admin/users/1

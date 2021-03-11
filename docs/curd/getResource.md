@@ -32,7 +32,7 @@ class UserController extends \Wantp\Neat\Http\Controllers\Controller
 Route::get('users/{user}',[\App\Modules\Admin\Http\Controllers\UserController::class,'show']);
 ```
 
-然后可以通过客户端请求接口获取资源列表了
+然后可以通过客户端请求接口获取资源了
 `GET` /api/admin/users/1
 
 
