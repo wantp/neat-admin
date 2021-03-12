@@ -84,26 +84,26 @@ class UserController extends Controller
 
 ## 分页
 
-`__index` 默认对资源列表进行分页，使用参数page、page_size控制列表分页
+`__index` 默认对资源列表进行分页，使用参数page、pageSize控制列表分页
 
 > 请求参数
 
 | 参数 | 类型 | 是否必填 | 说明 |
 | --- | --- | ----| --- |
 | page | int | 否 | 页码 默认1 |
-| page_size | int | 否 | 单页数据量 默认10 |
+| pageSize | int | 否 | 单页数据量 默认10 |
 
 > 请求示例
 
-`GET` /api/admin/users?page=3&page_size=10
+`GET` /api/admin/users?page=3&pageSize=10
 
 ##### 不使用分页
 
-如果不需要分页，可以通过传参page_size=-1来获取所有数据
+如果不需要分页，可以通过传参pageSize=-1来获取所有数据
 
 > 请求示例
 
-`GET` /api/admin/users?page_size=-1
+`GET` /api/admin/users?pageSize=-1
 
 ## 排序
 

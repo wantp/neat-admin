@@ -53,7 +53,7 @@ Route::get('users_export',[UserControler::class, 'export']);
 | export_file_type | string | 否 | 文件类型 xlsx,csv,ods 默认xlsx |
 | export_file_name | string | 否 | 导出文件名 |
 | page | int | 是 | 页码 |
-| page_size | int | 是 | 单页数据量 |
+| pageSize | int | 是 | 单页数据量 |
 
 
 请求示例

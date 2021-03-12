@@ -4,7 +4,7 @@ return [
     'version' => '0.1.0',
     'param_name' => [
         'include' => 'include',
-        'pageSize' => 'page_size',
+        'pageSize' => 'pageSize',
         'sorter' => 'sorter',
         'filter' => 'filter',
     ],
