@@ -223,6 +223,7 @@ class GenerateCommand extends Command
                 'DummyFilterClass',
                 'DummyResourceClass',
                 'DummyModel',
+                '$dummyModel',
             ],
             [
                 getAppPsr4NamespaceByPath($controllersPath),
@@ -234,6 +235,7 @@ class GenerateCommand extends Command
                 $dummyFilterClass,
                 $dummyResourceClass,
                 $this->modelName,
+                '$' . lcfirst($this->modelName),
             ],
             $stub);
         $this->files->put($path, $content);

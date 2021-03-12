@@ -3,8 +3,9 @@
 namespace DummyNamespace;
 
 use Illuminate\Database\Eloquent\Model;
+use Wantp\Neat\Models\Traits\SerializeDate;
 
 class DummyModel extends Model
 {
-
+    use SerializeDate;
 }

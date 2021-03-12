@@ -61,21 +61,21 @@ class DummyController extends Controller
     /**
      * Update Resource
      *
-     * @param DummyModel $model
+     * @param DummyModel $dummyModel
      * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function update(DummyModel $model, Request $request)
+    public function update(DummyModel $dummyModel, Request $request)
     {
-        return parent::__update($model, $request->all());
+        return parent::__update($dummyModel, $request->all());
     }
 
     /**
-     * @param DummyModel $model
+     * @param DummyModel $dummyModel
      * @return string[]
      */
-    public function destroy(DummyModel $model)
+    public function destroy(DummyModel $dummyModel)
     {
-        return parent::__destroy($model);
+        return parent::__destroy($dummyModel);
     }
 }
