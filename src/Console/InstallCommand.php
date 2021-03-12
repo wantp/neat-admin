@@ -73,19 +73,19 @@ class InstallCommand extends Command
 
     protected function installControllers()
     {
-        $this->files->makeDirectory(Neat::controllersPath(), 0644, true);
+        $this->files->makeDirectory(Neat::controllersPath(), 0755, true);
         $this->line('<info>Controller directory create successed:</info>');
     }
 
     protected function installFilters()
     {
-        $this->files->makeDirectory(Neat::filtersPath(), 0644, true);
+        $this->files->makeDirectory(Neat::filtersPath(), 0755, true);
         $this->line('<info>Controller directory create successed:</info>');
     }
 
     protected function installResources()
     {
-        $this->files->makeDirectory(Neat::resourcesPath(), 0644, true);
+        $this->files->makeDirectory(Neat::resourcesPath(), 0755, true);
         $this->line('<info>Controller directory create successed:</info>');
     }
 
