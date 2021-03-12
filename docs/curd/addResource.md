@@ -1,6 +1,5 @@
 # 添加资源
 
-
 `\Wantp\Neat\Http\Controllers\Controller` 的 `__store` 方法对添加资源进行了封装。  
 **使用方法：**
 
@@ -30,5 +29,6 @@ Route::POST('users',[\App\Modules\Admin\Http\Controllers\UserController::class,'
 然后可以通过客户端请求接口添加资源了
 `POST` /api/admin/users
 
+## 模型关联
 
-## 添加关联
+阅读 [保存关联](saveRelation.md) 了解保存模型关联的使用方法

@@ -24,6 +24,7 @@
   - [添加资源](curd/addResource.md)
   - [更新资源](curd/updateResource.md)
   - [删除资源](curd/destroyResource.md)
+  - [保存关联](curd/saveRelation.md)
 
 
 - 文件系统
