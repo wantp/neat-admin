@@ -7,11 +7,21 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
+use Illuminate\Support\Traits\Macroable;
 
 class Relation
 {
+    use Macroable;
+
+    /**
+     * @var Model
+     */
     protected $model;
 
+    /**
+     * @var array
+     */
     protected $inputs = [];
 
     /**
@@ -19,7 +29,7 @@ class Relation
      * @param $model
      * @param $inputs
      */
-    public function __construct($model, $inputs)
+    public function __construct(Model $model, $inputs = [])
     {
         $this->model = $model;
         $this->setInputs($inputs);
@@ -28,10 +38,10 @@ class Relation
     /**
      * @param $inputs
      */
-    protected function setInputs($inputs)
+    public function setInputs($inputs)
     {
         foreach ($inputs as $key => $value) {
-            if (method_exists($this->model, $key)) {
+            if (!is_null($value) && method_exists($this->model, $key)) {
                 $this->inputs[$key] = $value;
             }
         }
@@ -52,84 +62,95 @@ class Relation
     {
         foreach ($this->inputs as $key => $value) {
             $relation = call_user_func([$this->model, $key]);
-            if ($relation instanceof BelongsToMany) {
-                $this->saveBelongsToMany($relation, $value);
-            } elseif ($relation instanceof HasOne) {
-                $this->saveHasOne($relation, $value);
-            } elseif ($relation instanceof HasMany) {
-                $this->saveHasMany($relation, $value);
-            }
+            $relationName = Str::afterLast(get_class($relation), '\\');
+            $saveRelationMehodName = 'save' . $relationName;
+
+            call_user_func_array([$this, $saveRelationMehodName], [$relation, $value]);
         }
     }
 
     /**
-     * @param BelongsToMany $relation
-     * @param $value
-     */
-    protected function saveBelongsToMany(BelongsToMany $relation, $value)
-    {
-        if (is_string($value)) {
-            $value = json_decode($value, true);
-        }
-        $relation->sync(array_column($value, $relation->getRelatedKeyName()));
-    }
-
-    /**
+     * Save HasOne Relation
+     *
      * @param HasOne $relation
-     * @param $value
+     * @param $attributes
      */
-    protected function saveHasOne(HasOne $relation, $value)
+    protected function saveHasOne(HasOne $relation, $attributes)
     {
-        if (is_string($value)) {
-            $value = json_decode($value, true);
+        $attributes = $this->attributes2Collection($attributes);
+
+        if ($attributes->isEmpty()) {
+            $relation->delete();
+            return;
         }
 
-        if (empty($value)) {
-            return $relation->delete();
+        $model = $relation->first() ?? $relation->newModelInstance();
+        foreach ($attributes as $field => $attribute) {
+            $model->{$field} = $attribute;
         }
 
-        $relationModle = $relation->first() ?? $relation->getModel();
-        foreach ($value as $field => $item) {
-            $relationModle->{$field} = $item;
-        }
-
-        return $relation->save($relationModle);
+        $relation->save($model);
     }
 
     /**
+     * Save HasMany Relation
+     *
      * @param HasMany $relation
      * @param $values
      */
-    protected function saveHasMany(HasMany $relation, $values)
+    protected function saveHasMany(HasMany $relation, $attributes)
     {
-        if (is_string($values)) {
-            $values = collect(json_decode($values, true));
-        }
+        $attributes = $this->attributes2Collection($attributes);
 
         $localKey = $relation->getLocalKeyName();
 
-        $existsRelationValues = [];
-        $newRelationValues = [];
-        $values->map(function ($value) use (&$existsRelationValues, &$newRelationValues, $localKey) {
-            if (!empty($value[$localKey])) {
-                $existsRelationValues[$value[$localKey]] = $value;
+        $addAttributes = new Collection();
+        $updateAttributes = new Collection();
+        foreach ($attributes as $attribute) {
+            if (empty($attribute[$localKey])) {
+                $addAttributes->add($attribute);
             } else {
-                $newRelationValues[] = $value;
+                $updateAttributes->put($attribute[$localKey], $attribute);
             }
-        });
+        }
 
-        $models = new Collection();
+        $models = $relation->makeMany($addAttributes);
         $relationModels = collect($relation->getModels())->keyBy($localKey);
-        $relationModels->map(function (Model $model) use ($models, $localKey, $existsRelationValues) {
-            if (isset($existsRelationValues[$model->{$localKey}])) {
-                $model->fill($existsRelationValues[$model->{$localKey}]);
-                $models->add($model);
-            } else {
+        foreach ($relationModels as $key => $model) {
+            if (!$updateAttributes->has($key)) {
                 $model->delete();
+                continue;
             }
-        });
-        $models = $models->concat($relation->makeMany($newRelationValues));
+            $model->fill($updateAttributes[$model->{$localKey}]);
+            $models->add($model);
+        }
 
-        return $relation->saveMany($models);
+        $relation->saveMany($models);
+    }
+
+
+    /**
+     * Save BelongsToMany Relation
+     *
+     * @param BelongsToMany $relation
+     * @param $value
+     */
+    protected function saveBelongsToMany(BelongsToMany $relation, $attributes)
+    {
+        $attributes = $this->attributes2Collection($attributes);
+        $relation->sync($attributes->pluck($relation->getRelatedKeyName()));
+    }
+
+    /**
+     * @param $attributes
+     * @return Collection
+     */
+    protected function attributes2Collection($attributes)
+    {
+        if (is_string($attributes)) {
+            $attributes = json_decode($attributes, true);
+        }
+
+        return collect($attributes);
     }
 }

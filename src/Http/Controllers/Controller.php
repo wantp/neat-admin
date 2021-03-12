@@ -51,7 +51,7 @@ class Controller extends BaseController
     public function __index()
     {
         $query = app()->make($this->modelClass);
-
+        $this->inputs = filterNullInput(request()->all());
         $this->includes($query);
         $this->filter($query);
         $this->sorter($query);
@@ -83,7 +83,7 @@ class Controller extends BaseController
     public function __store($inputs)
     {
         $this->model = app()->make($this->modelClass);
-        $this->inputs = $this->filterNullInput($inputs);
+        $this->inputs = filterNullInput($inputs);
         $this->save();
 
         return $this->responseResource($this->model);
@@ -98,7 +98,7 @@ class Controller extends BaseController
     public function __update(Model $model, $inputs)
     {
         $this->model = $model;
-        $this->inputs = $this->filterNullInput($inputs);
+        $this->inputs = filterNullInput($inputs);
         $this->save();
 
         return $this->responseResource($this->model);
@@ -143,8 +143,7 @@ class Controller extends BaseController
          * @var Filter $filter
          */
         $filter = app()->make($this->filterClass);
-        $inputs = $this->filterNullInput(request()->all());
-        $filter->__filter($query, $inputs);
+        $filter->__filter($query, $this->inputs);
     }
 
     /**
@@ -165,10 +164,9 @@ class Controller extends BaseController
     /**
      * Save
      */
-    private function save()
+    protected function save()
     {
-        $this->setAttribute();
-        $this->model->save();
+        $this->saveModel();
         $this->relation()->save();
     }
 
@@ -201,37 +199,39 @@ class Controller extends BaseController
     }
 
     /**
-     * Fill model
-     *
-     * @param $model
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    protected function setAttribute()
+    protected function saveModel()
     {
-        $relationInputs = $this->relation()->getInputs();
-
-        $attributies = $this->inputs;
-        if ($relationInputs) {
-            $attributies = array_filter($attributies, function ($key) use ($relationInputs) {
-                return !array_key_exists($key, $relationInputs);
-            }, ARRAY_FILTER_USE_KEY);
-        }
+        $attributies = $this->getSaveAttribute();
 
         foreach ($attributies as $field => $attribute) {
             $this->model->{$field} = $attribute;
         }
+
+        $this->model->save();
     }
 
     /**
-     * Filter Null Input
-     *
-     * @param $inputs
      * @return array
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    protected function filterNullInput($inputs)
+    protected function getRelationInputs()
     {
-        return array_filter($inputs, function ($input) {
-            return $input !== '' && !is_null($input);
-        });
+        return $this->relation()->getInputs();
+    }
+
+    /**
+     * @return array
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    protected function getSaveAttribute()
+    {
+        $relationInputs = $this->getRelationInputs();
+
+        return array_filter($this->inputs, function ($key) use ($relationInputs) {
+            return !array_key_exists($key, $relationInputs);
+        }, ARRAY_FILTER_USE_KEY);
     }
 
     /**
