@@ -2,7 +2,7 @@
 
 namespace Wantp\Neat\Models\Traits;
 
-trait AdminDatabaseConnection
+trait NeatDatabaseConnection
 {
     /**
      * @return \Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application|mixed
