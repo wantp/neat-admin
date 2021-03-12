@@ -29,13 +29,12 @@
 ### Github pages 托管
 
 - [neat-admin](https://wantp.github.io/neat-admin/)
-- [neat-admin-react](https://wantp.github.io/neat-admin-react/)
+
 
 
 ### Gitee pages 托管
 
 - [neat-admin](https://zhangrongwang.gitee.io/neat-admin/)
-- [neat-admin-react](https://zhangrongwang.gitee.io/neat-admin-react/)
 
 
 ## License
