@@ -20,7 +20,7 @@ class UserController extends \Wantp\Neat\Http\Controllers\Controller
 
 ## 添加资源
 
-控制器完成后，要获取资源还需要配置路由 配置store路由
+控制器完成后，要添加资源还需要配置路由 配置store路由
 
 ```php
 Route::POST('users',[\App\Modules\Admin\Http\Controllers\UserController::class,'store']);
